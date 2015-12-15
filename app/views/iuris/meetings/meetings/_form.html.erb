@@ -1,0 +1,49 @@
+<%#= form_for(@meeting) do |f| %>
+
+<div class="row">
+  <div class="col-md-8">
+    <% if @meeting.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+  
+        <ul>
+        <% @meeting.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= f.label :title, class: 'control-label' %><br>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body, class: 'control-label' %><br>
+      <%= f.text_area :body, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :meeting_date, class: 'control-label' %><br>
+      <%= f.date_field :meeting_date, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :starts, class: 'control-label' %><br>
+      <%= f.time_field :starts, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :ends, class: 'control-label' %><br>
+      <%= f.time_field :ends, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :user_id, class: 'control-label' %>
+      <%= f.select :user_id, Iuris::User.all.pluck(:email, :id), {selected: current_user.id}, class: 'form-control' %>
+    </div>
+  <%- if Iuris::Core.avaiable?(:contacts) %>
+    <div class="form-group">
+      <%= f.label :contact_id, class: 'control-label' %>
+      <%= f.select :contact_id, Iuris::Contacts::Contact.all.pluck(:email, :id), {include_blank: true}, class: 'form-control' %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<%# end %>

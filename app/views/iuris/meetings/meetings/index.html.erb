@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'New Meeting', iuris.new_meeting_path, class: 'btn btn-primary pull-right meetings_link' %>
+
+<h2>Meetings</h2>
+
+<hr>
+
+<%= link_to iuris.meetings_monthly_path, class: 'meetings_link', remote: true do %>
+  <button class="btn btn-default">Monthly!</button>
+<% end %>
+<%= link_to iuris.meetings_weekly_path, class: 'meetings_link', remote: true do %>
+  <button class="btn btn-default">Weekly!</button>
+<% end %>
+
+<div id="ajax-calendar">
+</div>

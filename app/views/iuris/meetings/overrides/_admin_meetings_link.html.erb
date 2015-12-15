@@ -1,0 +1,5 @@
+<li role="presentation" class="<%= active(iuris.admin_meetings_path) %>">
+	<%= link_to iuris.admin_meetings_path do %>
+		Citas <span class="badge"><%= @meetings.count %></span>
+	<% end %>
+</li>

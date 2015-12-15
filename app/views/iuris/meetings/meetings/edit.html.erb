@@ -1,0 +1,11 @@
+<h2>Editing Meeting</h2>
+<hr>
+<%= form_for([iuris, @meeting]) do |f| %>
+	<%= render 'form', f: f %>
+	<div class="form-group">
+		<div>
+			<%= f.submit 'Actualizar Tarea', class: 'btn btn-primary' %>
+			<%= link_to 'Volver', iuris.meetings_path, class: 'btn btn-default' %>
+		</div>
+	</div>
+<% end %>

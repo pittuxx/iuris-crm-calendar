@@ -1,0 +1,30 @@
+<hr>
+<% if @contact.meetings.count > 0 then %>
+<div class="panel panel-primary">
+	<div class="panel-heading">Citas asociadas a este contacto</div>
+	<table class="table display" id="">
+    <thead>
+      <th>Usuario</th>
+      <th>Título</th>
+      <th>Contenido</th>
+      <th>Fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <%- @contact.meetings.ordered.each do |meeting| %>
+      <tr class="">
+        <td><%= meeting.user.email %></td>
+        <td><%= meeting.title %></td>
+        <td><%= meeting.body.truncate_words(8) %></td>
+        <td><%= l(meeting.created_at, format: :default) %></td>
+        <td><%= link_to icon_meeting, [iuris, meeting], title: 'Ver la cita' %></td>
+        <td><%= link_to icon_edit, iuris.edit_meeting_path(meeting), title: 'Editar la cita' %></td>
+        <td><%= link_to icon_trash, [iuris, meeting], method: :delete, data: {confirm: 'Está segur@ de que desea eliminar la cita de la lista?'}, title: 'Eliminar la cita' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>

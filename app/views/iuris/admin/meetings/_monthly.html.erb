@@ -1,0 +1,29 @@
+<div id="articles" class="calendar">
+  <h2 id="month">
+    <%= link_to '<', iuris.url_for(action:"monthly", controller:"iuris/admin/meetings", 
+    date: @date.prev_month), remote: true %>
+    <%= @date.strftime("%B %Y") %>
+    <%= link_to '>', iuris.url_for(action:"monthly", controller:"iuris/admin/meetings", 
+    date: @date.next_month), remote: true %>
+  </h2>
+  <div class="table-responsive">
+    <%= calendar @date do |date| %>
+      <%= date.day %>
+      <% if @meetings_by_day[date] %>
+      <ul>
+        <% @meetings_by_day[date].sort {|a,b| a.starts <=> b.starts }.each do |meeting| %>
+        <li>
+          <%= link_to "#{meeting.starts.strftime("%I:%M%p")} - #{meeting.title} (#{meeting.user.email})", iuris.meeting_path(meeting), {data: {toggle: 'tooltip', placement: 'bottom'}, title: "#{meeting.body}" } %>
+        </li>
+        <% end %>
+      </ul>
+      <% end %> 
+    <%end%>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

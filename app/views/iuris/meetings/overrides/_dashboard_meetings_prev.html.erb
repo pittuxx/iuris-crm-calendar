@@ -1,0 +1,27 @@
+<div class="col-md-6">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			Últimas Citas
+		</div>
+		<table class="table">
+			<thead>
+				<th>Cita</th>
+				<th>Fecha</th>
+				<th>Hora</th>
+			</thead>
+			<tbody>
+			<% current_user.meetings.ordered.limit(3).each do |meeting| %>
+				<tr class="">
+					<td><%= meeting.title %></td>
+					<td><%= meeting.meeting_date.strftime("%d %b. %Y") %></td>
+					<td><%= meeting.starts.strftime("%H:%M") %> - 
+					<%= meeting.ends.strftime("%H:%M") %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+		<div class="panel-body text-center">
+			<%= link_to '-> Ir al Calendario', iuris.meetings_path %>
+		</div>
+	</div>
+</div>

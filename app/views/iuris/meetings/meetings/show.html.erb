@@ -1,0 +1,45 @@
+<!--<p id="notice"><%#= notice %></p>-->
+<h2><%= @meeting.title %></h2>
+<hr>
+
+<div class="row">
+  <div class="col-md-8">
+    <table style="border-collapse: separate; border-spacing: 4px;">
+      <tbody>
+        <tr>
+          <td><strong>Título:</strong></td>
+          <td><%= @meeting.title %></td>
+        </tr>
+        <tr>
+          <td><strong>Anotaciones:</strong></td>
+          <td><%= @meeting.body %></td>
+        </tr>
+        <tr>
+          <td><strong>Fecha:</strong></td>
+          <td><%= @meeting.meeting_date.strftime("%d-%m-%Y") %></td>
+        </tr>
+        <tr>
+          <td><strong>Hora:</strong></td>
+          <td><%= @meeting.starts.strftime("%I:%M%p") + ' - ' + @meeting.ends.strftime("%I:%M%p") %></td>
+        </tr>
+        <tr>
+          <td><strong>Usuario:</strong></td>
+          <td><%= @meeting.user.email %></td>
+        </tr>
+        <tr>
+          <td><strong>Contacto:</strong></td>
+          <td><%= @meeting.contact ? link_to(@meeting.contact.first_name + ' ' + @meeting.contact.last_name, 
+            iuris.contact_path(@meeting.contact)) : '...' %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr>
+
+
+
+
+<%= link_to 'Edit', iuris.edit_meeting_path(@meeting) %> |
+<%= link_to 'Back', iuris.meetings_path %> |
+<%= link_to 'Destroy', [iuris, @meeting], method: :delete, data: { confirm: 'Are you sure?' } %>
